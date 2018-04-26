@@ -65,6 +65,7 @@ func main() {
 	player.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '옷'})
 	level.AddEntity(&player)
 
+	game.Screen().SetFps(30)
 	game.Screen().SetLevel(level)
 	game.Start()
 }
