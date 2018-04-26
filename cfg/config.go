@@ -9,7 +9,7 @@ import (
 
 // Config holds the available configurable options
 type Config struct {
-	FPS float64
+	FPS float64 `toml:"fps"`
 }
 
 // GetConfig parses the config.tmol file
