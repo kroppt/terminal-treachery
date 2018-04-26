@@ -22,7 +22,9 @@ func GetConfig() Config {
 		}
 		setDefault(&conf)
 		enc := toml.NewEncoder(f)
-		enc.Encode(&conf)
+		if err = enc.Encode(&conf); err != nil {
+			log.Fatalln(err)
+		}
 	}
 	return conf
 }
