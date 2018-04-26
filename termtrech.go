@@ -3,6 +3,7 @@ package main
 import (
 	tl "github.com/JoelOtter/termloop"
 	cfg "github.com/kroppt/terminal-treachery/cfg"
+	"github.com/nsf/termbox-go"
 )
 
 // Player represents entity information for the player.
@@ -49,11 +50,14 @@ func (player *Player) Draw(screen *tl.Screen) {
 }
 
 func main() {
+	// remove base colors and bold
+	termbox.SetOutputMode(termbox.Output216)
 	game := tl.NewGame()
 
+	off := 1 // default color is 0
 	level := tl.NewBaseLevel(tl.Cell{
-		Bg: tl.ColorGreen,
-		Fg: tl.ColorBlack,
+		Bg: tl.Attr(180 + off),
+		Fg: tl.Attr(137 + off),
 		Ch: 'v',
 	})
 	level.AddEntity(tl.NewRectangle(10, 10, 50, 20, tl.ColorBlue))
