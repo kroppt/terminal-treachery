@@ -1,3 +1,4 @@
+// Package cfg implements configuration file encoding, decoding, and storing.
 package cfg
 
 import (
