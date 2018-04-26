@@ -2,6 +2,7 @@ package main
 
 import (
 	tl "github.com/JoelOtter/termloop"
+	cfg "github.com/kroppt/terminal-treachery/cfg"
 )
 
 // Player represents entity information for the player.
@@ -65,6 +66,9 @@ func main() {
 	player.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '옷'})
 	level.AddEntity(&player)
 
+	conf := cfg.GetConfig()
+
+	game.Screen().SetFps(conf.FPS)
 	game.Screen().SetLevel(level)
 	game.Start()
 }
