@@ -1,6 +1,8 @@
 package actor
 
 import (
+	"errors"
+
 	tl "github.com/JoelOtter/termloop"
 )
 
@@ -12,6 +14,96 @@ type Player struct {
 	prevX     int
 	prevY     int
 	level     *tl.BaseLevel
+}
+
+// HealAction is the action for healing
+type HealAction struct {
+	*Player
+	h     int32
+	ready bool
+}
+
+// HitAction is the action for being hit
+type HitAction struct {
+	*Player
+	d     int32
+	ready bool
+}
+
+// GetActor returns the actor associated with the action
+func (a *HealAction) GetActor() Actor {
+	return a.Player
+}
+
+// GetActor returns the actor associated with the action
+func (a *HealAction) String() string {
+	return "heal"
+}
+
+// Heal prepares the heal action
+func (a *HealAction) Heal(h int32) {
+	a.h = h
+	a.ready = true
+}
+
+// Do executes the heal action
+func (a *HealAction) Do() error {
+	if !a.ready {
+		return errors.New("struct HealAction not ready, use HealAction.Heal(int32) first")
+	}
+	if a.h == 0 {
+		a.Health = a.MaxHealth
+	}
+	a.Health += a.h
+	if a.Health > a.MaxHealth {
+		a.Health = a.MaxHealth
+	}
+	return nil
+}
+
+// GetActor returns the actor associated with the action
+func (a *HitAction) GetActor() Actor {
+	return a.Player
+}
+
+// GetActor returns the actor associated with the action
+func (a *HitAction) String() string {
+	return "hit"
+}
+
+// Hit lowers the player's health
+func (a *HitAction) Hit(d int32) {
+	a.d = d
+	a.ready = true
+}
+
+// Do executes the hit action on its actor
+func (a *HitAction) Do() error {
+	if !a.ready {
+		return errors.New("struct HitAction not ready, use HitAction.Hit(int32) first")
+	}
+	a.Health -= a.d
+	if a.Health < 0 {
+		a.Health = 0
+	}
+	return nil
+}
+
+// GetEntity returns the entity of the player
+func (p *Player) GetEntity() *tl.Entity {
+	return p.Entity
+}
+
+// SetEntity sets the entity of the player to the given entity
+func (p *Player) SetEntity(e *tl.Entity) {
+	p.Entity = e
+}
+
+// Inspect returns a list of available actions to take against the player
+func (p *Player) Inspect() []Action {
+	hit := &HitAction{p, 0, false}
+	heal := &HealAction{p, 0, false}
+	return []Action{hit, heal}
 }
 
 // AddLevel adds the given level to the player for position centering
@@ -58,39 +150,4 @@ func NewPlayer(e *tl.Entity) *Player {
 	var p Player
 	p.SetEntity(e)
 	return &p
-}
-
-// GetEntity returns the entity of the player
-func (p *Player) GetEntity() *tl.Entity {
-	return p.Entity
-}
-
-// SetEntity sets the entity of the player to the given entity
-func (p *Player) SetEntity(e *tl.Entity) {
-	p.Entity = e
-}
-
-// Heal increases the player's health
-func (p *Player) Heal(h int32) {
-	if h == 0 {
-		p.Health = p.MaxHealth
-		return
-	}
-	p.Health += h
-	if p.Health > p.MaxHealth {
-		p.Health = p.MaxHealth
-	}
-}
-
-// Hit lowers the player's health
-func (p *Player) Hit(d int32) {
-	p.Health -= d
-	if p.Health < 0 {
-		p.Health = 0
-	}
-}
-
-// Inspect returns a list of available actions to take against the player
-func (p *Player) Inspect() []string {
-	return []string{"heal", "hit"}
 }

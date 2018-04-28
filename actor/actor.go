@@ -8,5 +8,12 @@ import (
 type Actor interface {
 	GetEntity() *tl.Entity
 	SetEntity(*tl.Entity)
-	Inspect() []string
+	Inspect() []Action
+}
+
+// Action type in order to fulfill generality of actor behavior
+type Action interface {
+	GetActor() Actor
+	String() string
+	Do() error
 }
