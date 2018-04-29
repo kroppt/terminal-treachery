@@ -2,8 +2,8 @@ package main
 
 import (
 	tl "github.com/JoelOtter/termloop"
-	actor "github.com/kroppt/terminal-treachery/actor"
-	cfg "github.com/kroppt/terminal-treachery/cfg"
+	"github.com/kroppt/terminal-treachery/actor"
+	"github.com/kroppt/terminal-treachery/cfg"
 	"github.com/nsf/termbox-go"
 )
 
