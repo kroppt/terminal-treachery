@@ -52,10 +52,12 @@ func (a *HealAction) Do() error {
 		return errors.New("struct HealAction not ready, use HealAction.Heal(int32) first")
 	}
 	if a.h == 0 {
+		// 0 HP is code for max heal
 		a.Health = a.MaxHealth
 	}
 	a.Health += a.h
 	if a.Health > a.MaxHealth {
+		// Wasted health points
 		a.Health = a.MaxHealth
 	}
 	return nil
