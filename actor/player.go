@@ -41,9 +41,10 @@ func (a *HealAction) String() string {
 }
 
 // Heal prepares the heal action
-func (a *HealAction) Heal(h int32) {
+func (a *HealAction) Heal(h int32) *HealAction {
 	a.h = h
 	a.ready = true
+	return a
 }
 
 // Do executes the heal action
@@ -74,9 +75,10 @@ func (a *HitAction) String() string {
 }
 
 // Hit lowers the player's health
-func (a *HitAction) Hit(d int32) {
+func (a *HitAction) Hit(d int32) *HitAction {
 	a.d = d
 	a.ready = true
+	return a
 }
 
 // Do executes the hit action on its actor
