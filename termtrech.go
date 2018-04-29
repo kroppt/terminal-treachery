@@ -23,7 +23,7 @@ func main() {
 	level.AddEntity(tl.NewRectangle(10, 10, 50, 20, tl.ColorBlue))
 
 	// Set the character at position (0, 0) on the entity.
-	player.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '옷'})
+	player.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: 'o'})
 	player.AddLevel(level)
 	level.AddEntity(player)
 
