@@ -1,0 +1,10 @@
+github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
+github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
+github.com/JoelOtter/termloop v0.0.0-20171105180545-99de0b20653e h1:E5bpEObMpKLv6iXZ2hJTRfom9R2Qw9v7Kh0Axmg+PSA=
+github.com/JoelOtter/termloop v0.0.0-20171105180545-99de0b20653e/go.mod h1:Tie7OOEgasw91JpzA8UywemPyGehxZ06Gqtl5B1/vXI=
+github.com/mattn/go-runewidth v0.0.3 h1:a+kO+98RDGEfo6asOGMmpodZq4FNtnGP54yps8BzLR4=
+github.com/mattn/go-runewidth v0.0.3/go.mod h1:LwmH8dsx7+W8Uxz3IHJYH5QSwggIsqBzpuz5H//U1FU=
+github.com/nsf/termbox-go v0.0.0-20181027232701-60ab7e3d12ed h1:bAVGG6B+R5qpSylrrA+BAMrzYkdAoiTaKPVxRB+4cyM=
+github.com/nsf/termbox-go v0.0.0-20181027232701-60ab7e3d12ed/go.mod h1:IuKpRQcYE1Tfu+oAQqaLisqDeXgjyyltCfsaoYN18NQ=
+golang.org/x/tools v0.0.0-20181102223251-96e9e165b75e h1:mWs/o39kL0UjStxJimqI7o6rKvqDZcAQxqnwG6lmxfc=
+golang.org/x/tools v0.0.0-20181102223251-96e9e165b75e/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
