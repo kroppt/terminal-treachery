@@ -4,13 +4,13 @@ import (
 	tl "github.com/JoelOtter/termloop"
 )
 
-// Actor type that has the entity and available actions
+// Actor is an entity with available Actions.
 type Actor interface {
 	SetEntity(*tl.Entity)
 	Inspect() []Action
 }
 
-// Action type in order to fulfill generality of actor behavior
+// Action is a struct that fulfills actionable behavior.
 type Action interface {
 	GetActor() Actor
 	String() string

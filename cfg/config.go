@@ -8,12 +8,12 @@ import (
 	"github.com/BurntSushi/toml"
 )
 
-// Config holds the available configurable options
+// Config holds the available configurable options.
 type Config struct {
 	FPS float64 `toml:"fps"`
 }
 
-// GetConfig parses the config.tmol file
+// GetConfig parses the config.tmol file.
 func GetConfig() Config {
 	var conf Config
 	if _, err := toml.DecodeFile("conf.toml", &conf); err != nil {
@@ -30,7 +30,7 @@ func GetConfig() Config {
 	return conf
 }
 
-// Config defaults go here
+// setDefault sets defaults for the given Config.
 func setDefault(c *Config) {
 	c.FPS = 60.0
 }

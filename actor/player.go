@@ -7,7 +7,7 @@ import (
 	"github.com/kroppt/terminal-treachery/terrain"
 )
 
-// Player is the user-controlled player
+// Player is the user-controlled player.
 type Player struct {
 	*tl.Entity
 	Health    int32
@@ -17,72 +17,72 @@ type Player struct {
 	level     *tl.BaseLevel
 }
 
-// HealAction is the action for healing
+// HealAction is the action for healing.
 type HealAction struct {
 	*Player
 	h     int32
 	ready bool
 }
 
-// HitAction is the action for being hit
+// HitAction is the action for being hit.
 type HitAction struct {
 	*Player
 	d     int32
 	ready bool
 }
 
-// GetActor returns the actor associated with the action
+// GetActor returns the actor associated with the action.
 func (a *HealAction) GetActor() Actor {
 	return a.Player
 }
 
-// GetActor returns the actor associated with the action
+// GetActor returns the actor associated with the action.
 func (a *HealAction) String() string {
 	return "heal"
 }
 
-// Heal prepares the heal action
+// Heal prepares the heal action.
 func (a *HealAction) Heal(h int32) *HealAction {
 	a.h = h
 	a.ready = true
 	return a
 }
 
-// Do executes the heal action
+// Do executes the heal action.
 func (a *HealAction) Do() error {
 	if !a.ready {
 		return errors.New("struct HealAction not ready, use HealAction.Heal(int32) first")
 	}
 	if a.h == 0 {
-		// 0 HP is code for max heal
+		// 0 HP is code for max heal.
 		a.Health = a.MaxHealth
 	}
 	a.Health += a.h
 	if a.Health > a.MaxHealth {
-		// Wasted health points
+		// Wasted health points.
 		a.Health = a.MaxHealth
 	}
 	return nil
 }
 
-// GetActor returns the actor associated with the action
+// GetActor returns the actor associated with the action.
 func (a *HitAction) GetActor() Actor {
 	return a.Player
 }
 
-// GetActor returns the actor associated with the action
+// GetActor returns the actor associated with the action.
 func (a *HitAction) String() string {
 	return "hit"
 }
 
-// Hit lowers the player's health
+// Hit lowers the player's health.
 func (a *HitAction) Hit(d int32) *HitAction {
 	a.d = d
 	a.ready = true
 	return a
 }
 
-// Do executes the hit action on its actor
+// Do executes the hit action on its actor.
 func (a *HitAction) Do() error {
 	if !a.ready {
 		return errors.New("struct HitAction not ready, use HitAction.Hit(int32) first")
@@ -94,24 +94,24 @@ func (a *HitAction) Do() error {
 	return nil
 }
 
-// SetEntity sets the entity of the player to the given entity
+// SetEntity sets the entity of the player to the given entity.
 func (p *Player) SetEntity(e *tl.Entity) {
 	p.Entity = e
 }
 
-// Inspect returns a list of available actions to take against the player
+// Inspect returns a list of available actions to take against the player.
 func (p *Player) Inspect() []Action {
 	hit := &HitAction{p, 0, false}
 	heal := &HealAction{p, 0, false}
 	return []Action{hit, heal}
 }
 
-// AddLevel adds the given level to the player for position centering
+// AddLevel adds the given level to the player for position centering.
 func (p *Player) AddLevel(l *tl.BaseLevel) {
 	p.level = l
 }
 
-// Tick executes one game loop
+// Tick executes one game loop.
 func (p *Player) Tick(event tl.Event) {
 	if event.Type == tl.EventKey { // Is it a keyboard event?
 		p.prevX, p.prevY = p.Position()
@@ -145,7 +145,7 @@ func (p *Player) Draw(screen *tl.Screen) {
 	p.Entity.Draw(screen)
 }
 
-// NewPlayer returns a pointer to the newly created player with the given entity
+// NewPlayer returns a pointer to the newly created player with the given entity.
 func NewPlayer(e *tl.Entity) *Player {
 	var p Player
 	p.SetEntity(e)

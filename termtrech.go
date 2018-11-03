@@ -9,13 +9,13 @@ import (
 )
 
 func main() {
-	// remove base colors and bold
+	// Remove base colors and bold.
 	termbox.SetOutputMode(termbox.Output216)
 	game := tl.NewGame()
 
 	player := actor.NewPlayer(tl.NewEntity(1, 1, 1, 1))
 
-	off := 1 // default color is 0
+	off := 1 // Default color is 0.
 	level := tl.NewBaseLevel(tl.Cell{
 		Bg: tl.Attr(180 + off),
 		Fg: tl.Attr(137 + off),
