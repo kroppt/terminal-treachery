@@ -8,7 +8,7 @@ import (
 
 // Player is the user-controlled player
 type Player struct {
-	*tl.Entity
+	entity    *tl.Entity
 	Health    int32
 	MaxHealth int32
 	prevX     int
@@ -93,14 +93,14 @@ func (a *HitAction) Do() error {
 	return nil
 }
 
-// GetEntity returns the entity of the player
-func (p *Player) GetEntity() *tl.Entity {
-	return p.Entity
+// Entity returns the entity of the player
+func (p *Player) Entity() *tl.Entity {
+	return p.entity
 }
 
 // SetEntity sets the entity of the player to the given entity
 func (p *Player) SetEntity(e *tl.Entity) {
-	p.Entity = e
+	p.entity = e
 }
 
 // Inspect returns a list of available actions to take against the player
@@ -118,16 +118,16 @@ func (p *Player) AddLevel(l *tl.BaseLevel) {
 // Tick executes one game loop
 func (p *Player) Tick(event tl.Event) {
 	if event.Type == tl.EventKey { // Is it a keyboard event?
-		p.prevX, p.prevY = p.Position()
+		p.prevX, p.prevY = p.Entity().Position()
 		switch event.Key { // If so, switch on the pressed key.
 		case tl.KeyArrowRight:
-			p.SetPosition(p.prevX+1, p.prevY)
+			p.Entity().SetPosition(p.prevX+1, p.prevY)
 		case tl.KeyArrowLeft:
-			p.SetPosition(p.prevX-1, p.prevY)
+			p.Entity().SetPosition(p.prevX-1, p.prevY)
 		case tl.KeyArrowUp:
-			p.SetPosition(p.prevX, p.prevY-1)
+			p.Entity().SetPosition(p.prevX, p.prevY-1)
 		case tl.KeyArrowDown:
-			p.SetPosition(p.prevX, p.prevY+1)
+			p.Entity().SetPosition(p.prevX, p.prevY+1)
 		}
 	}
 }
@@ -136,17 +136,17 @@ func (p *Player) Tick(event tl.Event) {
 func (p *Player) Collide(collision tl.Physical) {
 	// Check if it's a Rectangle we're colliding with
 	if _, ok := collision.(*tl.Rectangle); ok {
-		p.SetPosition(p.prevX, p.prevY)
+		p.Entity().SetPosition(p.prevX, p.prevY)
 	}
 }
 
 // Draw the screen where the player is centered.
 func (p *Player) Draw(screen *tl.Screen) {
 	screenWidth, screenHeight := screen.Size()
-	x, y := p.Position()
+	x, y := p.Entity().Position()
 	p.level.SetOffset(screenWidth/2-x, screenHeight/2-y)
 	// We need to make sure and call Draw on the underlying Entity.
-	p.Entity.Draw(screen)
+	p.Entity().Draw(screen)
 }
 
 // NewPlayer returns a pointer to the newly created player with the given entity
