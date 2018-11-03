@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	tl "github.com/JoelOtter/termloop"
+	"github.com/kroppt/terminal-treachery/terrain"
 )
 
 // Player is the user-controlled player
@@ -130,7 +131,7 @@ func (p *Player) Tick(event tl.Event) {
 // Collide stops the player in a collision.
 func (p *Player) Collide(collision tl.Physical) {
 	// Check if it's a Rectangle we're colliding with
-	if _, ok := collision.(*tl.Rectangle); ok {
+	if _, ok := collision.(*terrain.Wall); ok {
 		p.SetPosition(p.prevX, p.prevY)
 	}
 }

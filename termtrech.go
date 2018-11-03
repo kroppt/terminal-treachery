@@ -4,6 +4,7 @@ import (
 	tl "github.com/JoelOtter/termloop"
 	"github.com/kroppt/terminal-treachery/actor"
 	"github.com/kroppt/terminal-treachery/cfg"
+	"github.com/kroppt/terminal-treachery/terrain"
 	"github.com/nsf/termbox-go"
 )
 
@@ -20,7 +21,9 @@ func main() {
 		Fg: tl.Attr(137 + off),
 		Ch: 'v',
 	})
-	level.AddEntity(tl.NewRectangle(10, 10, 50, 20, tl.ColorBlue))
+	rect := tl.NewRectangle(10, 10, 50, 20, tl.ColorBlue)
+	w := &terrain.Wall{Rectangle: rect}
+	level.AddEntity(w)
 
 	// Set the character at position (0, 0) on the entity.
 	player.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: 'o'})
