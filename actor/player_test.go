@@ -247,8 +247,8 @@ func TestPlayer_Entity(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := tt.p.Entity(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Player.Entity() = %v, want %v", got, tt.want)
+			if got := tt.p.Entity; !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Player.Entity = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -401,7 +401,7 @@ func TestPlayer_Draw(t *testing.T) {
 	}{
 		{
 			name: "normal use",
-			p:    &Player{entity: tl.NewEntity(1, 1, 1, 1), level: bl},
+			p:    &Player{Entity: tl.NewEntity(1, 1, 1, 1), level: bl},
 			args: args{game.Screen()},
 		},
 	}
@@ -425,7 +425,7 @@ func TestNewPlayer(t *testing.T) {
 		{
 			name: "normal use",
 			args: args{entity},
-			want: &Player{entity: entity},
+			want: &Player{Entity: entity},
 		},
 	}
 	for _, tt := range tests {

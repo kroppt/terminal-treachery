@@ -6,7 +6,6 @@ import (
 
 // Actor type that has the entity and available actions
 type Actor interface {
-	Entity() *tl.Entity
 	SetEntity(*tl.Entity)
 	Inspect() []Action
 }
